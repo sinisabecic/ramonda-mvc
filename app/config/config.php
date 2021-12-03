@@ -9,8 +9,10 @@ define('DB_NAME', 'db_store');
 define('APPROOT', dirname(dirname(__FILE__)));
 
 //* URLROOT
-define('URLROOT', $_SERVER['DOCUMENT_ROOT'] . '/mvc_unico');
-define('ROOT', 'http://localhost/mvc_unico');
+define('URLROOT', $_SERVER['DOCUMENT_ROOT'] . '/ramonda');
+define('ROOT', 'http://localhost/ramonda');
+define('ASSETS_URL', 'http://localhost/ramonda/public');
+define('ASSETS_SRC', $_SERVER['DOCUMENT_ROOT'] . '/ramonda/public');
 
 //* SITENAME
-define('SITENAME', 'MVC UNICO');
+define('SITENAME', 'Ramonda');

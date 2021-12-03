@@ -1,19 +1,18 @@
 <?php
 
-class Index extends Controller
+class Admin extends Controller
 {
     public function __construct()
     {
-        $this->userModel = $this->model('User');
-        // Session::checkSession();
     }
+
 
     public function index()
     {
         $data = [
-            'title-tab' => 'Login | Ramonda'
+            'title-tab' => 'Administration | Ramonda'
         ];
-        $this->view('login/login', $data);
+        $this->view('admin/admin', $data);
         // $this->view('includes/header');
         // $this->view('includes/navigation');
         // $this->view('includes/footer');
