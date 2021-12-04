@@ -3,6 +3,7 @@
 
 class Users extends Controller
 {
+
     public function __construct()
     {
         $this->userModel = $this->model('User');
@@ -14,7 +15,7 @@ class Users extends Controller
     {
         $users = $this->userModel->getUsers();
         $data = [
-            'title' => 'Users | MVC Unico',
+            'title-tab' => 'Users | Ramonda',
             'users' => $users,
         ];
 
@@ -26,15 +27,21 @@ class Users extends Controller
     {
         // Pri ucitavanju da se nista ne prikazuje u $data['...']
         $data = [
-            'title' => 'Sign up',
+            'title-tab' => 'Registration | Ramonda',
             'username' => '',
+            'name' => 'name',
             'email' => '',
             'password' => '',
             'confirmPassword' => '',
             'usernameError' => '',
+            'nameError' => '',
             'emailError' => '',
             'passwordError' => '',
             'confirmPasswordError' => '',
+            'country' => '',
+            'city' => '',
+            'zip' => '',
+            'phone' => '',
             'alert' => '',
         ];
 
@@ -44,15 +51,22 @@ class Users extends Controller
             $_POST = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
 
             $data = [
-                'title' => 'Sign up',
+                'title-tab' => 'Registration | Ramonda',
                 'username' => trim($_POST['username']),
+                'name' => trim($_POST['name']),
                 'email' => trim($_POST['email']),
                 'password' => trim($_POST['password']),
                 'confirmPassword' => trim($_POST['confirmPassword']),
                 'usernameError' => '',
                 'emailError' => '',
+                'nameError' => '',
                 'passwordError' => '',
                 'confirmPasswordError' => '',
+                'country' => trim($_POST['country']),
+                'city' => trim($_POST['city']),
+                'zip' => trim($_POST['zip']),
+                'phone' => trim($_POST['phone']),
+                'address' => trim($_POST['address']),
                 'alert' => '',
             ];
 
@@ -71,12 +85,10 @@ class Users extends Controller
                 $data['emailError'] = 'Please enter email address.';
             } elseif (!filter_var($data['email'], FILTER_VALIDATE_EMAIL)) {
                 $data['emailError'] = 'Please enter the correct format.';
-            } else {
-                //Check if email exists.
-                if ($this->userModel->findUserByEmail($data['email'])) {
-                    $data['emailError'] = 'Email is already taken.';
-                }
             }
+
+            if (empty($data['name']))
+                $data['nameError'] = 'Please enter name.';
 
             if (empty($data['password'])) {
                 $data['passwordError'] = 'Please enter a password';
@@ -95,18 +107,27 @@ class Users extends Controller
                 }
             }
 
+
+            // if ($this->userModel->findUserByUsername($data['username'])) {
+            //     $data['usernameError'] = 'Username is already taken.';
+            // }
+
+            // if ($this->userModel->findUserByEmail($data['email'])) {
+            //     $data['emailError'] = 'Email is already taken.';
+            // }
+
             //* Make sure that errors are empty
             if (
                 empty($data['usernameError']) && empty($data['emailError']) &&
-                empty($data['passwordError']) && empty($data['confirmPasswordError'])
+                empty($data['passwordError']) && empty($data['confirmPasswordError']) &&
+                empty($data['nameError'])
             ) {
                 //? Hash password
                 $data['password'] = password_hash($data['password'], PASSWORD_DEFAULT);
 
                 //? Register user from model function
                 if ($this->userModel->register($data)) {
-                    // Redirect to the login page
-                    header('Location: ' . ROOT . '/users/login');
+                    header('Location: ' . ROOT . '/login');
                     // $data['alert'] = "Registration success!";
                 } else {
                     // $data['alert'] = "Greska!";
@@ -114,7 +135,6 @@ class Users extends Controller
                 }
             }
         }
-
         $this->view('users/register', $data);
     }
 
@@ -122,11 +142,13 @@ class Users extends Controller
     public function login()
     {
         $data = [
-            'title' => 'Login page | MVC Unico',
+            'title-tab' => 'Login | Ramonda',
             'username' => '',
+            'email' => '',
             'password' => '',
             'usernameError' => '',
             'passwordError' => '',
+            'emailError' => '',
             'alert' => '',
         ];
 
@@ -135,11 +157,13 @@ class Users extends Controller
             $_POST = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
 
             $data = [
-                'title' => 'Login page | MVC Unico',
+                'title-tab' => 'Login | Ramonda',
                 'username' => trim($_POST['username']),
                 'password' => trim($_POST['password']),
+                'email' => '',
                 'usernameError' => '',
                 'passwordError' => '',
+                'emailError' => '',
                 'alert' => '',
             ];
 
@@ -158,30 +182,35 @@ class Users extends Controller
                 else {
                     $data['passwordError'] = "Password is incorrect. Please try again.";
 
-                    $this->view('users/login', $data);
+                    $this->view('login/login', $data);
                 }
             }
         } else {
             $data = [
-                'title' => 'Login page | MVC Unico',
+                'title-tab' => 'Login | Ramonda',
                 'username' => '',
                 'password' => '',
+                'email' => '',
                 'usernameError' => '',
                 'passwordError' => '',
+                'emailError' => '',
                 'alert' => '',
             ];
         }
-        $this->view('users/login', $data);
+        $this->view('login/login', $data);
     }
+
 
     public function createUserSession($user)
     {
         $_SESSION['user_id'] = $user->id;
         $_SESSION['username'] = $user->username;
         $_SESSION['email'] = $user->email;
+        $_SESSION['is_admin'] = $user->is_admin;
         $_SESSION['login'] = true;
-        header('location:' . ROOT . '/index');
+        header('location:' . ROOT . '/admin');
     }
+
 
     public function logout()
     {
@@ -189,6 +218,6 @@ class Users extends Controller
         unset($_SESSION['username']);
         unset($_SESSION['email']);
         unset($_SESSION['login']);
-        header("Location: " . ROOT . "/users/login");
+        header("Location: " . ROOT . "/login");
     }
 }
