@@ -1,4 +1,4 @@
-<?php require APPROOT . '/views/login/includes/header.php'; ?>
+<?php require APPROOT . '/views/users/includes/header.php'; ?>
 
 <div id="layoutAuthentication_content">
     <main>
@@ -7,8 +7,22 @@
                 <div class="col-lg-5">
                     <div class="card shadow-lg border-0 rounded-lg mt-5">
                         <div class="card-header">
-                            <h3 class="text-center font-weight-light my-4">Login</h3>
+                            <h3 class="text-center font-weight-light my-4">
+
+                                <?php
+                                if (isLoggedIn())
+                                    echo "Welcome " . getSession('username');
+                                else
+                                    echo 'Login';
+                                ?>
+
+                            </h3>
                         </div>
+
+                        <?php
+                        if (!isLoggedIn()) :
+                        ?>
+
                         <div class="card-body">
                             <form action="<?php echo ROOT; ?>/users/login" method="POST">
                                 <div class="form-floating mb-3">
@@ -35,14 +49,22 @@
                                 </div>
                             </form>
                         </div>
+                        <?php else : '';
+                        endif; ?>
+
                         <div class="card-footer text-center py-3">
-                            <div class="small"><a href="register.html">Need an account? Sign up!</a></div>
+                            <?php if (!isLoggedIn()) : ?>
+                            <div class="small"><a href="<?php echo ROOT ?>/users/register">Need an account? Sign up!</a>
+                                <?php else : ?>
+                                <div class="small"><a href="<?php echo ROOT ?>/users/logout">Logout</a>
+                                    <?php endif; ?>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
-        </div>
     </main>
 </div>
 
-<?php require APPROOT . '/views/login/includes/footer.php'; ?>
+<?php require APPROOT . '/views/users/includes/footer.php'; ?>

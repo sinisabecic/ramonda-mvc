@@ -13,5 +13,5 @@
     </script>
 </head>
 
-<body class="bg-primary">
+<body class="bg-secondary">
     <div id="layoutAuthentication">

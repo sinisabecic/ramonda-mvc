@@ -10,8 +10,6 @@ class Index extends Controller
 
     public function index()
     {
-        if (isLoggedIn())
-            header("Location: " . ROOT . "/admin");
 
         $data = [
             'title-tab' => 'Login | Ramonda',
@@ -19,17 +17,15 @@ class Index extends Controller
             'emailError' => '',
             'passwordError' => '',
         ];
-        $this->view('login/login', $data);
+        $this->view('users/login', $data);
         // $this->view('includes/header');
         // $this->view('includes/navigation');
         // $this->view('includes/footer');
     }
 
+
     public function register()
     {
-        if (isLoggedIn())
-            header("Location: " . ROOT . "/admin");
-
         $data = [
             'title-tab' => 'Registration | Ramonda',
             'username' => '',

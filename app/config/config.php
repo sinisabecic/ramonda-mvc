@@ -16,3 +16,7 @@ define('ASSETS_SRC', $_SERVER['DOCUMENT_ROOT'] . '/ramonda/public');
 
 //* SITENAME
 define('SITENAME', 'Ramonda');
+
+//* LOGOTIPI
+define('LOGO_SVG', ROOT . '/public/img/ramonda.svg');
+define('LOGO_PNG', ROOT . '/public/img/ramonda2.png');

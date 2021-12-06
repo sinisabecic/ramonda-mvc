@@ -13,7 +13,8 @@ class User
 
     public function getUsers()
     {
-        $this->db->query("SELECT * FROM tbl_users");
+        $this->db->query("SELECT * FROM tbl_users
+                          ORDER BY created_at ASC");
         return $this->db->resultSet();
     }
 
@@ -43,7 +44,7 @@ class User
     }
 
 
-    public function login($username, $password)
+    public function loginUser($username, $password)
     {
         $this->db->query('SELECT * FROM tbl_users
                           WHERE username = :username');
@@ -59,8 +60,7 @@ class User
             return false;
     }
 
-
-
+    //* Registracija sa korisnicke strane
     public function register($data)
     {
         $this->db->query('INSERT INTO tbl_users (id, username, email, password, 
@@ -90,5 +90,45 @@ class User
         } else {
             return false;
         }
+    }
+
+    //* Registracija sa administratorske strane
+    public function registerFromAdmin($data)
+    {
+        $this->db->query('INSERT INTO tbl_users (id, username, email, password, 
+                                                 name, address, phone, zip, country, city, is_admin) 
+                          VALUES(:id, :username, :email, :password,
+                                 :name, :address, :phone, :zip, :country, :city, :is_admin
+                          )');
+        // hash id
+        $rand = rand(999, 9999);
+        $data['id'] = md5($rand);
+
+        //Bind values
+        $this->db->bind(':id', $data['id']);
+        $this->db->bind(':username', $data['username']);
+        $this->db->bind(':email', $data['email']);
+        $this->db->bind(':name', $data['name']);
+        $this->db->bind(':password', $data['password']);
+        $this->db->bind(':address', $data['address']);
+        $this->db->bind(':phone', $data['phone']);
+        $this->db->bind(':zip', $data['zip']);
+        $this->db->bind(':country', $data['country']);
+        $this->db->bind(':city', $data['city']);
+        $this->db->bind(':is_admin', $data['is_admin']);
+
+        //* Execute function
+        return $this->db->execute() ? true : false;
+    }
+
+
+    public function deleteUser($id = NULL)
+    {
+        $this->db->query('DELETE FROM tbl_users
+                          WHERE id = :id');
+
+        $this->db->bind(':id', $id);
+
+        return $this->db->execute() ? true : false;
     }
 }

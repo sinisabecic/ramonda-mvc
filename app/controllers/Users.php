@@ -7,19 +7,6 @@ class Users extends Controller
     public function __construct()
     {
         $this->userModel = $this->model('User');
-        // Session::checkSession();
-    }
-
-
-    public function index()
-    {
-        $users = $this->userModel->getUsers();
-        $data = [
-            'title-tab' => 'Users | Ramonda',
-            'users' => $users,
-        ];
-
-        $this->view('users/users', $data);
     }
 
 
@@ -108,14 +95,6 @@ class Users extends Controller
             }
 
 
-            // if ($this->userModel->findUserByUsername($data['username'])) {
-            //     $data['usernameError'] = 'Username is already taken.';
-            // }
-
-            // if ($this->userModel->findUserByEmail($data['email'])) {
-            //     $data['emailError'] = 'Email is already taken.';
-            // }
-
             //* Make sure that errors are empty
             if (
                 empty($data['usernameError']) && empty($data['emailError']) &&
@@ -175,14 +154,14 @@ class Users extends Controller
             }
 
             if (empty($data['usernameError']) && empty($data['passwordError'])) {
-                $loggedInUser = $this->userModel->login($data['username'], $data['password']);
+                $loggedInUser = $this->userModel->loginUser($data['username'], $data['password']);
 
                 if ($loggedInUser)
                     $this->createUserSession($loggedInUser);
                 else {
                     $data['passwordError'] = "Password is incorrect. Please try again.";
 
-                    $this->view('login/login', $data);
+                    $this->view('users/login', $data);
                 }
             }
         } else {
@@ -204,11 +183,17 @@ class Users extends Controller
     public function createUserSession($user)
     {
         $_SESSION['user_id'] = $user->id;
+        $_SESSION['name'] = $user->name;
         $_SESSION['username'] = $user->username;
         $_SESSION['email'] = $user->email;
         $_SESSION['is_admin'] = $user->is_admin;
         $_SESSION['login'] = true;
-        header('location:' . ROOT . '/admin');
+        $_SESSION['logged_at'] = date("Y-m-d H:i:s");
+
+        if ($user->is_admin == 1)
+            header('location:' . ROOT . '/admin');
+        else
+            header('location:' . ROOT . '/login');
     }
 
 
@@ -219,5 +204,20 @@ class Users extends Controller
         unset($_SESSION['email']);
         unset($_SESSION['login']);
         header("Location: " . ROOT . "/login");
+    }
+
+
+    public function delete()
+    {
+        $data = [
+            'user_id' => $_GET['user_id'],
+            // 'user_id' => $_POST['user_id'],
+        ];
+
+        if (isAdmin()) {
+            if ($this->userModel->deleteUser($data['user_id']))
+                header("Location: " . ROOT . "/admin/users");
+        } else
+            header("Location: " . ROOT . "/login");
     }
 }

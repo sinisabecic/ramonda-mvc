@@ -14,7 +14,7 @@ class App
     public function __construct()
     {
         //print_r($this->getUrl());
-
+        date_default_timezone_set('Europe/Belgrade');
         $url = $this->getUrl();
 
 
