@@ -101,7 +101,7 @@
                         <div class="col-md-6">
                             <div class="mt-4 mb-0">
                                 <div class="d-grid">
-                                    <select class="form-control" name="role" id="roleUser" type="text"
+                                    <select class="form-control" name="is_admin" id="roleUser" type="text"
                                         placeholder="Select role (default is user)">
                                         <option value="0" selected>User</option>
                                         <option value="1">Administrator</option>

@@ -210,14 +210,49 @@ class Users extends Controller
     public function delete()
     {
         $data = [
-            'user_id' => $_GET['user_id'],
-            // 'user_id' => $_POST['user_id'],
+            // 'user_id' => $_GET['user_id'],
+            'user_id' => $_POST['user_id'],
         ];
 
-        if (isAdmin()) {
-            if ($this->userModel->deleteUser($data['user_id']))
-                header("Location: " . ROOT . "/admin/users");
-        } else
+        if (isAdmin())
+            $this->userModel->deleteUser($data['user_id']);
+        else
             header("Location: " . ROOT . "/login");
+    }
+
+
+    public function edit()
+    {
+        //! Ovo je potrebno da vidim podatke o izabranom korisniku i u konzoli
+        echo json_encode($this->userModel->getUserById($_POST['user_id']));
+    }
+
+
+    public function update()
+    {
+        if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+
+            $_POST = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
+            $data = [
+                'id' => trim($_POST['id']),
+                'username' => trim($_POST['username']),
+                'name' => trim($_POST['name']),
+                'email' => trim($_POST['email']),
+                // 'password' => trim($_POST['password']),
+                // 'confirmPassword' => trim($_POST['confirmPassword']),                
+                'country' => trim($_POST['country']),
+                'city' => trim($_POST['city']),
+                'zip' => trim($_POST['zip']),
+                'phone' => trim($_POST['phone']),
+                'address' => trim($_POST['address']),
+                'is_admin' => trim($_POST['is_admin']),
+
+            ];
+
+            if ($this->userModel->updateUser($data))
+                header("Location: " . ROOT . "/admin/users");
+            else
+                die('Greska');
+        }
     }
 }

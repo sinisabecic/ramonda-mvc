@@ -30,7 +30,9 @@
                             <th>Name</th>
                             <th>Username</th>
                             <th>E-mail</th>
-                            <th>Location</th>
+                            <th>Address</th>
+                            <th>City</th>
+                            <th>Country</th>
                             <th>Phone</th>
                             <th class="text-center">Action</th>
                         </tr>
@@ -40,7 +42,9 @@
                             <th>Name</th>
                             <th>Username</th>
                             <th>E-mail</th>
-                            <th>Location</th>
+                            <th>Address</th>
+                            <th>City</th>
+                            <th>Country</th>
                             <th>Phone</th>
                             <th>Action</th>
                         </tr>
@@ -48,16 +52,22 @@
                     <tbody>
                         <?php foreach ($data['users'] as $user) : ?>
                         <tr>
-                            <td><?php echo $user->name ?></td>
-                            <td><?php echo $user->username ?></td>
+                            <td><?= $user->name; ?></td>
+                            <td><?= $user->username; ?></td>
                             <td>
                                 <a href="mailto:<?php echo $user->email ?>" class="text-dark">
-                                    <?php echo $user->email ?>
+                                    <?= $user->email; ?>
                                 </a>
                             </td>
-                            <td><?php echo $user->address . ', ' .
-                                        $user->city . ', ' .
-                                        $user->country; ?></td>
+                            <td>
+                                <?= $user->address; ?>
+                            </td>
+                            <td>
+                                <?= $user->city; ?>
+                            </td>
+                            <td>
+                                <?= $user->country; ?>
+                            </td>
                             <td>
                                 <a href="tel:<?php echo $user->phone ?>" class="text-dark">
                                     <?php echo $user->phone ?>
@@ -66,21 +76,21 @@
                             <td class="d-flex justify-content-center">
                                 <div class="d-inline-flex">
                                     <div class="px-1">
-                                        <a href="#" data-toggle="modal" data-target="#<?= $user->id ?>">
+                                        <a href="#" id="edituser" class="text-primary" data-bs-toggle="modal"
+                                            data-bs-target="#editModal" data-id="<?= $user->id ?>">
                                             <i class="bi bi-pencil-square"></i>
                                         </a>
                                     </div>
 
-                                    <?php require APPROOT . '/views/admin/includes/edit-user.php'; ?>
-
                                     <div class="px-1">
-                                        <a href="<?= ROOT ?>/users/delete?user_id=<?= $user->id ?>" class="text-danger">
+                                        <a href="#" onclick="deleteUser('<?= $user->id; ?>')" class="text-danger">
                                             <i class="bi bi-x-square-fill"></i>
                                         </a>
                                     </div>
                                 </div>
                             </td>
                         </tr>
+
                         <?php endforeach; ?>
                     </tbody>
                 </table>
@@ -90,5 +100,5 @@
 </main>
 
 
-
 <?php require APPROOT . '/views/admin/includes/footer.php'; ?>
+<?php require APPROOT . '/views/admin/includes/edit-user.php'; ?>
