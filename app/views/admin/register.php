@@ -1,7 +1,7 @@
 <?php require APPROOT . '/views/admin/includes/header.php'; ?>
+<?php require APPROOT . '/views/admin/includes/countries.php'; ?>
 <?php require APPROOT . '/views/admin/includes/navigation.php'; ?>
 <?php require APPROOT . '/views/admin/includes/sidebar.php'; ?>
-
 
 <main>
     <div class="container-fluid px-4">
@@ -39,9 +39,23 @@
                     <div class="row mb-3">
                         <div class="col-md-6">
                             <div class="form-floating mb-3 mb-md-0">
-                                <input class="form-control selectpicker" name="country" id="inputCountry" type="text"
-                                    placeholder="Enter your address" />
-                                <label for="inputCountry">Country</label>
+
+                                <select class="form-select" name="country" id="country" type="text"
+                                    placeholder="Select country">
+
+                                    <option value="Montenegro, ME" title="Montenegro" selected>
+                                        Montenegro
+                                    </option>
+                                    <?php foreach ($countries as $key => $country) : ?>
+
+                                    <option value="<?= htmlspecialchars($country) ?>, <?= $key ?>"
+                                        title="<?= htmlspecialchars($country) ?>">
+                                        <?= htmlspecialchars($country) ?>
+                                    </option>
+
+                                    <?php endforeach; ?>
+                                </select>
+                                <label for="country">Country</label>
                             </div>
                         </div>
                         <div class="col-md-6">

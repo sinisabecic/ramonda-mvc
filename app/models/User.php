@@ -95,11 +95,7 @@ class User
         $this->db->bind(':city', $data['city']);
 
         //* Execute function
-        if ($this->db->execute()) {
-            return true;
-        } else {
-            return false;
-        }
+        return $this->db->execute() ? true : false;
     }
 
     //* Registracija sa administratorske strane

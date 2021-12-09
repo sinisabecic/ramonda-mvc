@@ -7,13 +7,17 @@ class Admin extends Controller
     {
         checkSession();
         $this->userModel = $this->model('User');
+        $this->sessionModel = $this->model('Session');
     }
 
 
     public function index()
     {
+        $users = $this->userModel->getUsers();
         $data = [
-            'title-tab' => 'CMS | Ramonda'
+            'title-tab' => 'CMS | Ramonda',
+            'users' => $users,
+            'table-name' => 'Users',
         ];
 
         $this->view('admin/admin', $data);
@@ -29,9 +33,46 @@ class Admin extends Controller
         $data = [
             'title-tab' => 'Users | Ramonda',
             'users' => $users,
+            'page' => 'Users',
         ];
 
         $this->view('admin/users', $data);
+    }
+
+    //* JS funkcija u functions.js
+    public function products($vendor)
+    {
+        if ($vendor == 'comtrade') :
+
+            $users = $this->userModel->getUsers();
+            $data = [
+                'title-tab' => 'Users | Ramonda',
+                'page' => 'Comtrade',
+                'users' => $users,
+            ];
+
+            $this->view('admin/products/comtrade', $data);
+        else :
+            header("Location: " . ROOT . '/admin');
+        endif;
+    }
+
+
+    public function sessions()
+    {
+        $sessions = $this->sessionModel->getSessions();
+        $data = [
+            'title-tab' => 'Sessions | Ramonda',
+            'page' => 'Sessions',
+            'jsonData' => $_SESSION,
+            'sessions' => $sessions,
+        ];
+
+        if (isset($_GET['type']) && $_GET['type'] == 'json') :
+            echo json_encode($data['sessions']);
+        else :
+            $this->view('admin/sessions', $data);
+        endif;
     }
 
     //* 
@@ -143,16 +184,5 @@ class Admin extends Controller
         }
 
         $this->view('admin/register', $data);
-    }
-
-
-
-    public function sessions()
-    {
-        $data = [
-            'sessions' => $_SESSION
-        ];
-
-        $this->view('admin/sessions', $data);
     }
 }

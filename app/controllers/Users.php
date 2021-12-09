@@ -7,6 +7,7 @@ class Users extends Controller
     public function __construct()
     {
         $this->userModel = $this->model('User');
+        $this->sessionModel = $this->model('Session');
     }
 
 
@@ -156,13 +157,15 @@ class Users extends Controller
             if (empty($data['usernameError']) && empty($data['passwordError'])) {
                 $loggedInUser = $this->userModel->loginUser($data['username'], $data['password']);
 
-                if ($loggedInUser)
+                if ($loggedInUser) :
                     $this->createUserSession($loggedInUser);
-                else {
-                    $data['passwordError'] = "Password is incorrect. Please try again.";
+                    // Za tabelu tbl_session
+                    $this->sessionModel->insertSessionData($loggedInUser->id);
 
+                else :
+                    $data['passwordError'] = "Password is incorrect. Please try again.";
                     $this->view('users/login', $data);
-                }
+                endif;
             }
         } else {
             $data = [
@@ -188,7 +191,6 @@ class Users extends Controller
         $_SESSION['email'] = $user->email;
         $_SESSION['is_admin'] = $user->is_admin;
         $_SESSION['login'] = true;
-        $_SESSION['logged_at'] = date("Y-m-d H:i:s");
 
         if ($user->is_admin == 1)
             header('location:' . ROOT . '/admin');

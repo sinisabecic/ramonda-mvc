@@ -246,6 +246,10 @@ small,
   font-size: 0.875em;
 }
 
+.no-underline {
+  text-decoration: none;
+}
+
 mark,
 .mark {
   padding: 0.2em;

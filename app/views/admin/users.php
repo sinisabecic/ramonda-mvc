@@ -1,15 +1,17 @@
 <?php require APPROOT . '/views/admin/includes/header.php'; ?>
+<?php require APPROOT . '/views/admin/includes/countries.php'; ?>
 <?php require APPROOT . '/views/admin/includes/navigation.php'; ?>
 <?php require APPROOT . '/views/admin/includes/sidebar.php'; ?>
 
 
 <main>
     <div class="container-fluid px-4">
-        <h1 class="mt-4">Users</h1>
+        <h1 class="mt-4"><?= $data['page'] ?></h1>
         <ol class="breadcrumb mb-4">
             <li class="breadcrumb-item"><a href="<?= ROOT ?>/admin">Dashboard</a></li>
             <li class="breadcrumb-item active">List users</li>
         </ol>
+
         <!-- <div class="card mb-4">
             <div class="card-body">
                 DataTables is a third party plugin that is used to generate the demo table below. For more information
@@ -100,5 +102,5 @@
 </main>
 
 
-<?php require APPROOT . '/views/admin/includes/footer.php'; ?>
 <?php require APPROOT . '/views/admin/includes/edit-user.php'; ?>
+<?php require APPROOT . '/views/admin/includes/footer.php'; ?>

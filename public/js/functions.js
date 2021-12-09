@@ -1,5 +1,4 @@
 //* Za brisanje korisnika iz CMS
-
 function deleteUser(item) {
   if (confirm("Are you sure?")) {
     var formData = {
@@ -67,33 +66,148 @@ $(document).on("click", "#edituser", function () {
   });
 });
 
-// $(document).on("click", "#edituser", function () {
-//   $("#editModal").modal("show");
+//* Comtrade products I nacin
+async function getData(url = "") {
+  // Default options are marked with *
+  const response = await fetch(url, {
+    method: "GET", // *GET, POST, PUT, DELETE, etc.
+    mode: "cors", // no-cors, *cors, same-origin
+    cache: "no-cache", // *default, no-cache, reload, force-cache, only-if-cached
+    credentials: "same-origin", // include, *same-origin, omit
+    headers: {
+      "Content-Type": "application/json",
+      // 'Content-Type': 'application/x-www-form-urlencoded',
+    },
+    redirect: "follow", // manual, *follow, error
+    referrerPolicy: "no-referrer", // no-referrer, *no-referrer-when-downgrade, origin, origin-when-cross-origin, same-origin, strict-origin, strict-origin-when-cross-origin, unsafe-url
+    body: JSON.stringify(), // body data type must match "Content-Type" header
+  });
+  return response.json(); // parses JSON response into native JavaScript objects
+}
+//todo POZIVANJE OVE GORNJE FUNKCIJE
+//* Comtrade JS
+document.querySelector("tbody").addEventListener("load", getData);
+getData("http://localhost/ramonda/public/json/cjenovnik-comtrade.json")
+  .then((data) => {
+    // console.log(data);
+    let output = "";
+    let i = 0;
+    data.forEach((item) => {
+      i++;
+      output += `
+                <tr>
+<td>${item.naziv.substring(0, 30)}</td>
+<td>${item.proizvodjac}</td>
+<td>${item.grupa}</td>
+<td>${item.vpc_sa_pdv}</td>
+<td>${item.vpcena}</td>
+<td>${item.GS}</td>
+<td>${item.Barcode}</td>
+<td class="d-flex justify-content-center">
+  <div class="d-inline-flex">
+    <div class="px-1">
+      <a
+        href="#"
+        id="edituser"
+        class="text-primary"
+        data-bs-toggle="modal"
+        data-bs-target="#editModal"
+        data-id="${i}"
+      >
+        <i class="bi bi-pencil-square"></i>
+      </a>
+    </div>
 
-//   $tr = $(this).closest("td");
+    <div class="px-1">
+      <a href="#" class="text-danger">
+        <i class="bi bi-x-square-fill"></i>
+      </a>
+    </div>
+  </div>
+</td>
+</tr>`;
+    });
+    document.getElementById("main").innerHTML = output;
+  })
+  .catch((err) => console.log(err));
 
-//   var data = $tr
-//     .children("td")
-//     .map(function () {
-//       return $(this).text;
-//     })
-//     .get();
+//? ########################################################
 
-//   console.log(data[4]);
+//! Comtrade funkcija II(stariji) nacin
+// function getJSON() {
+//     fetch("http://localhost/ramonda/public/json/cjenovnik-comtrade.json")
+//         .then((res) => res.json())
+//         .then((data) => {
+//             console.log(data);
+//             let output = '';
+//             let i = 0;
+//             data.forEach(item => {
+//                 i++;
+//                 output += `
+//                 <tr>
+// <td>${item.naziv.substring(0, 30)}</td>
+// <td>${item.proizvodjac}</td>
+// <td>${item.grupa}</td>
+// <td>${item.vpc_sa_pdv}</td>
+// <td>${item.vpcena}</td>
+// <td>${item.GS}</td>
+// <td>${item.Barcode}</td>
+// <td class="d-flex justify-content-center">
+//   <div class="d-inline-flex">
+//     <div class="px-1">
+//       <a
+//         href="#"
+//         id="edituser"
+//         class="text-primary"
+//         data-bs-toggle="modal"
+//         data-bs-target="#editModal"
+//         data-id="${i}"
+//       >
+//         <i class="bi bi-pencil-square"></i>
+//       </a>
+//     </div>
 
-// $("#user_id").val(data[0]);
-// $("#name").val(data[0]);
-// $("#email").val(data[1]);
-// $("#password").val(data[2]);
-// $("#country").val(data[3]);
-// $("#city").val(data[4]);
-// $("#zip").val(data[5]);
-// $("#username").val(data[6]);
-// $("#password").val(data[7]);
-// $("#confirmPassword").val(data[8]);
-// $("#role").val(data[9]);
-// });
+//     <div class="px-1">
+//       <a href="#" class="text-danger">
+//         <i class="bi bi-x-square-fill"></i>
+//       </a>
+//     </div>
+//   </div>
+// </td>
+// </tr>`;
+//             });
+//             document.getElementById("main").innerHTML = output;
+//         })
+//         .catch((err) => console.log(err));
+// }
+//
 
-// $("#close").on("click", function () {
-//   $("#editModal").modal("hide");
-// });
+//? #################################################################
+
+//* Za brisanje sesije iz CMS
+function deleteSession(item) {
+  if (confirm("Are you sure?")) {
+    var formData = {
+      session_id: item,
+    };
+    $.ajax({
+      type: "POST",
+      url: "http://localhost/ramonda/sessions/delete",
+      data: formData,
+      success: function (response) {
+        if (response.error) {
+          console.log(response.error);
+          alert(response.error);
+        } else {
+          console.log(response.success);
+          window.location.reload(true);
+        }
+      },
+      error: function (error) {
+        console.log(error);
+        alert("Greška, učitajte ponovo");
+      },
+      async: false,
+    });
+  }
+}

@@ -36,8 +36,18 @@
                     <div class="row mb-3">
                         <div class="col-md-6">
                             <div class="form-floating mb-3 mb-md-0">
-                                <input class="form-control selectpicker" name="country" id="country" type="text"
-                                    placeholder="Enter your address" />
+                                <select class="form-select" name="country" id="country" type="text"
+                                    placeholder="Select country">
+
+                                    <?php foreach ($countries as $key => $country) : ?>
+
+                                    <option value="<?= htmlspecialchars($country) ?>, <?= $key ?>"
+                                        title="<?= htmlspecialchars($country) ?>">
+                                        <?= htmlspecialchars($country) ?>
+                                    </option>
+
+                                    <?php endforeach; ?>
+                                </select>
                                 <label for="country">Country</label>
                             </div>
                         </div>
