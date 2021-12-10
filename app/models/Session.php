@@ -49,12 +49,10 @@ class Session
     public function getSessionsByMonth($month_no = NULL)
     {
 
-        $this->db->query('SELECT COUNT(y.month) count_of_logins
+        $this->db->query('SELECT count(y.user_id) count_of_logins
                           FROM (SELECT *, Month(CAST(logged_at as DATE)) month
-                                FROM tbl_sessions x
-                                GROUP by user_id, month) y
-                          WHERE y.month in (1,2,3,4,5,6,7,8,9,10,11,12)
-                          GROUP BY y.month
+                                FROM tbl_sessions) y
+                          GROUP by y.month
                         ');
 
         $this->db->bind(':month_no', $month_no);

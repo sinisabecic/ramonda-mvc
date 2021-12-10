@@ -86,7 +86,7 @@ async function getData(url = "") {
 }
 //todo POZIVANJE OVE GORNJE FUNKCIJE
 //* Comtrade JS
-document.querySelector("tbody").addEventListener("load", getData);
+document.querySelector("body").addEventListener("DOMContentLoaded", getData);
 getData("http://localhost/ramonda/public/json/cjenovnik-comtrade.json")
   .then((data) => {
     // console.log(data);

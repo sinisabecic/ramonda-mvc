@@ -77,6 +77,20 @@ class Admin extends Controller
             $this->view('admin/sessions', $data);
     }
 
+
+    public function activity()
+    {
+        $sessions = $this->sessionModel->getSessions();
+
+        $data = [
+            'title-tab' => 'Activity | Ramonda',
+            'page' => 'Sessions',
+            'sessions' => $sessions,
+        ];
+
+        $this->view('admin/activity', $data);
+    }
+
     //* 
     public function register()
     {
