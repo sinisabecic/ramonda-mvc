@@ -14,13 +14,15 @@ class Admin extends Controller
     public function index()
     {
         $users = $this->userModel->getUsers();
+        $sessions = $this->sessionModel->getSessionsByMonth();
         $data = [
             'title-tab' => 'CMS | Ramonda',
             'users' => $users,
             'table-name' => 'Users',
+            'sessions' => $sessions,
         ];
-
         $this->view('admin/admin', $data);
+
         // $this->view('includes/header');
         // $this->view('includes/navigation');
         // $this->view('includes/footer');
@@ -61,6 +63,7 @@ class Admin extends Controller
     public function sessions()
     {
         $sessions = $this->sessionModel->getSessions();
+
         $data = [
             'title-tab' => 'Sessions | Ramonda',
             'page' => 'Sessions',
@@ -68,11 +71,10 @@ class Admin extends Controller
             'sessions' => $sessions,
         ];
 
-        if (isset($_GET['type']) && $_GET['type'] == 'json') :
+        if (isset($_GET['type']) && $_GET['type'] == 'json')
             echo json_encode($data['sessions']);
-        else :
+        else
             $this->view('admin/sessions', $data);
-        endif;
     }
 
     //* 

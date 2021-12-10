@@ -9,6 +9,7 @@ class Sessions extends Controller
         $this->sessionModel = $this->model('Session');
     }
 
+    //* Za ajax f-ju
     public function delete()
     {
         $data = [

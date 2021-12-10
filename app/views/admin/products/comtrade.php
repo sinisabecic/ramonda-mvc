@@ -26,7 +26,7 @@
                 Table of all users
             </div>
             <div class="card-body">
-                <table id="datatablesSimple">
+                <table id="dataTable" class="display">
                     <thead>
                         <tr>
                             <th>Naziv</th>

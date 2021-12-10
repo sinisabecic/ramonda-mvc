@@ -16,7 +16,7 @@ function isLoggedIn()
 
 function isAdmin()
 {
-    if ($_SESSION['is_admin'] == 1)
+    if (isset($_SESSION['login']) && $_SESSION['is_admin'] == 1)
         return true;
     else
         return false;

@@ -64,7 +64,7 @@
                 <div class="card mb-4">
                     <div class="card-header">
                         <i class="fas fa-chart-area me-1"></i>
-                        Area Chart Example
+                        Area Chart of Sessions
                     </div>
                     <div class="card-body"><canvas id="myAreaChart" width="100%" height="40"></canvas></div>
                 </div>
@@ -73,9 +73,13 @@
                 <div class="card mb-4">
                     <div class="card-header">
                         <i class="fas fa-chart-bar me-1"></i>
-                        Bar Chart Example
+                        Bar Chart of Sessions
                     </div>
-                    <div class="card-body"><canvas id="myBarChart" width="100%" height="40"></canvas></div>
+
+                    <div class="card-body">
+                        <canvas id="myBarChart" width="100%" height="40">
+                        </canvas>
+                    </div>
                 </div>
             </div>
         </div>
@@ -85,7 +89,7 @@
                 <?= $data['table-name']; ?>
             </div>
             <div class="card-body">
-                <table id="datatablesSimple">
+                <table id="datatablesSimple" class="display compact">
                     <thead>
                         <tr>
                             <th>Name</th>
