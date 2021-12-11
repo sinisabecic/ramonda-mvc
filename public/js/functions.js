@@ -103,6 +103,7 @@ getData("http://localhost/ramonda/public/json/cjenovnik-comtrade.json")
 <td>${item.vpcena}</td>
 <td>${item.GS}</td>
 <td>${item.Barcode}</td>
+
 </tr>`;
     });
     $("#main").html(output);

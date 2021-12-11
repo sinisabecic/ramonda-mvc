@@ -18,7 +18,7 @@ var oct = $("#sessionsCount10").text().trim();
 var nov = $("#sessionsCount11").text().trim();
 var dec = $("#sessionsCount12").text().trim();
 
-var ctx = document.getElementById("myBarChart");
+var ctx = $("#myBarChart");
 
 var myLineChart = new Chart(ctx, {
   type: "bar",
