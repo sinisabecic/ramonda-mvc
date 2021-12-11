@@ -103,31 +103,9 @@ getData("http://localhost/ramonda/public/json/cjenovnik-comtrade.json")
 <td>${item.vpcena}</td>
 <td>${item.GS}</td>
 <td>${item.Barcode}</td>
-<td class="d-flex justify-content-center">
-  <div class="d-inline-flex">
-    <div class="px-1">
-      <a
-        href="#"
-        id="edituser"
-        class="text-primary"
-        data-bs-toggle="modal"
-        data-bs-target="#editModal"
-        data-id="${i}"
-      >
-        <i class="bi bi-pencil-square"></i>
-      </a>
-    </div>
-
-    <div class="px-1">
-      <a href="#" class="text-danger">
-        <i class="bi bi-x-square-fill"></i>
-      </a>
-    </div>
-  </div>
-</td>
 </tr>`;
     });
-    document.getElementById("main").innerHTML = output;
+    $("#main").html(output);
   })
   .catch((err) => console.log(err));
 

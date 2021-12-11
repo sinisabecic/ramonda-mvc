@@ -2,6 +2,7 @@
 <?php require APPROOT . '/views/admin/includes/navigation.php'; ?>
 <?php require APPROOT . '/views/admin/includes/sidebar.php'; ?>
 
+<?php foreach ($data['lastActivity'] as $activity) : endforeach; ?>
 
 <main>
     <div class="container-fluid px-4">
@@ -53,7 +54,7 @@
                     </tfoot>
                     <tbody>
 
-                        <?php foreach ($data['sessions'] as $session) : ?>
+                        <?php foreach ($data['sessionsAll'] as $session) : ?>
 
                         <tr>
                             <td><?= $session->s_id; ?></td>
@@ -96,31 +97,20 @@
                 </table>
             </div>
         </div>
+
+        <div class="card mb-4">
+            <div class="card-header">
+                <i class="fas fa-chart-area me-1"></i>
+                Area Chart Sessions
+            </div>
+            <div class="card-body"><canvas id="myAreaChart" width="100%" height="30"></canvas></div>
+            <div class="card-footer small text-muted">Updated
+                <?= date_format(date_create($activity->date), 'd.m.Y'); ?> at
+                <?= $activity->time ?></div>
+        </div>
+
     </div>
 </main>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 <?php require APPROOT . '/views/admin/includes/edit-user.php'; ?>

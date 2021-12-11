@@ -1,16 +1,45 @@
 // Set new default font family and font color to mimic Bootstrap's default styling
-Chart.defaults.global.defaultFontFamily = '-apple-system,system-ui,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif';
-Chart.defaults.global.defaultFontColor = '#292b2c';
+Chart.defaults.global.defaultFontFamily =
+  '-apple-system,system-ui,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif';
+Chart.defaults.global.defaultFontColor = "#292b2c";
 
 // Pie Chart Example
-var ctx = document.getElementById("myPieChart");
+var ctx = $("#myPieChart");
 var myPieChart = new Chart(ctx, {
-  type: 'pie',
+  type: "pie",
   data: {
-    labels: ["Blue", "Red", "Yellow", "Green"],
-    datasets: [{
-      data: [12.21, 15.58, 11.25, 8.32],
-      backgroundColor: ['#007bff', '#dc3545', '#ffc107', '#28a745'],
-    }],
+    labels: [
+      "Jan",
+      "Feb",
+      "Mar",
+      "Apr",
+      "May",
+      "Jun",
+      "Jul",
+      "Aug",
+      "Sep",
+      "Oct",
+      "Nov",
+      "Dec",
+    ],
+    datasets: [
+      {
+        data: [jan, feb, mar, apr, may, jun, jul, aug, sep, oct, nov, dec],
+        backgroundColor: [
+          "#007bff",
+          "#dc3545",
+          "#FFAFAF",
+          "#00A19D",
+          "#66806A",
+          "#F6D167",
+          "#781D42",
+          "#FF5403",
+          "#28a745",
+          "#DE09CC",
+          "#28a745",
+          "#9D5C0D",
+        ],
+      },
+    ],
   },
 });

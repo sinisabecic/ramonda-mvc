@@ -26,7 +26,7 @@
                 Table of all users
             </div>
             <div class="card-body">
-                <table id="dataTable" class="display">
+                <table id="datatablesSimple">
                     <thead>
                         <tr>
                             <th>Naziv</th>
@@ -36,7 +36,7 @@
                             <th>VPC</th>
                             <th>GS</th>
                             <th>Barkod</th>
-                            <th class="text-center">Action</th>
+                            <!-- <th class="text-center">Action</th> -->
                         </tr>
                     </thead>
                     <tfoot>
@@ -48,7 +48,7 @@
                             <th>VPC</th>
                             <th>GS</th>
                             <th>Barkod</th>
-                            <th class="text-center">Action</th>
+                            <!-- <th class="text-center">Action</th> -->
                         </tr>
                     </tfoot>
                     <!--//* functions.js  -->

@@ -62,30 +62,38 @@ class Admin extends Controller
 
     public function sessions()
     {
-        $sessions = $this->sessionModel->getSessions();
+        $sessionsAll = $this->sessionModel->getSessions();
+        $sessions = $this->sessionModel->getSessionsByMonth();
+        $lastActivity = $this->sessionModel->lastActivity();
 
         $data = [
             'title-tab' => 'Sessions | Ramonda',
             'page' => 'Sessions',
             'jsonData' => $_SESSION,
             'sessions' => $sessions,
+            'sessionsAll' => $sessionsAll,
+            'lastActivity' => $lastActivity,
         ];
 
-        if (isset($_GET['type']) && $_GET['type'] == 'json')
+        if (isset($_GET['type']) && $_GET['type'] == 'json') :
             echo json_encode($data['sessions']);
-        else
+        else :
             $this->view('admin/sessions', $data);
+        endif;
     }
 
 
     public function activity()
     {
-        $sessions = $this->sessionModel->getSessions();
+        // $sessions = $this->sessionModel->getSessions();
+        $lastActivity = $this->sessionModel->lastActivity();
+        $sessions = $this->sessionModel->getSessionsByMonth();
 
         $data = [
             'title-tab' => 'Activity | Ramonda',
             'page' => 'Sessions',
             'sessions' => $sessions,
+            'lastActivity' => $lastActivity,
         ];
 
         $this->view('admin/activity', $data);

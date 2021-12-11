@@ -46,16 +46,24 @@ class Session
     }
 
 
-    public function getSessionsByMonth($month_no = NULL)
+    public function getSessionsByMonth()
     {
-
         $this->db->query('SELECT count(y.user_id) count_of_logins
                           FROM (SELECT *, Month(CAST(logged_at as DATE)) month
                                 FROM tbl_sessions) y
                           GROUP by y.month
                         ');
 
-        $this->db->bind(':month_no', $month_no);
+        return $this->db->resultSet();
+    }
+
+    public function lastActivity()
+    {
+        $this->db->query('SELECT logged_at as date, time_format(logged_at, "%H:%i %p") as time
+                          FROM tbl_sessions
+                          ORDER BY logged_at DESC
+                          LIMIT 1
+      ');
 
         return $this->db->resultSet();
     }
