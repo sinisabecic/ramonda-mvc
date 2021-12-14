@@ -2660,6 +2660,16 @@ textarea.form-control-lg {
   margin-right: 1rem;
 }
 
+#bulkOption button {
+  margin-top: -3px;
+}
+
+#bulkOption button:focus,
+#bulkOption button:active {
+  outline: none !important;
+  box-shadow: none;
+}
+
 .btn-check {
   position: absolute;
   clip: rect(0, 0, 0, 0);
@@ -3228,6 +3238,15 @@ textarea.is-invalid.dataTable-input {
   transition: color 0.15s ease-in-out, background-color 0.15s ease-in-out,
     border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
 }
+
+#addUser.btn:focus,
+#addUser.btn:active,
+#btn_delete:focus,
+#btn_delete:active {
+  outline: none !important;
+  box-shadow: none !important;
+}
+
 @media (prefers-reduced-motion: reduce) {
   .btn {
     transition: none;

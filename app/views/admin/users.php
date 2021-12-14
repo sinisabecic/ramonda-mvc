@@ -29,6 +29,9 @@
                 <table id="datatablesSimple">
                     <thead>
                         <tr>
+                            <th>
+                                <input type="checkbox" name="" id="selectAllUsers">
+                            </th>
                             <th>Name</th>
                             <th>Username</th>
                             <th>E-mail</th>
@@ -52,12 +55,16 @@
                         </tr>
                     </tfoot>
                     <tbody>
+
                         <?php foreach ($data['users'] as $user) : ?>
-                        <tr>
+                        <tr class="row-user" data-id="<?= $user->id ?>">
+                            <td>
+                                <input type="checkbox" name="user_id[]" id="delete_user" data-id="<?= $user->id ?>">
+                            </td>
                             <td><?= $user->name; ?></td>
                             <td><?= $user->username; ?></td>
                             <td>
-                                <a href="mailto:<?php echo $user->email ?>" class="text-dark">
+                                <a href=" mailto:<?php echo $user->email ?>" class="text-dark">
                                     <?= $user->email; ?>
                                 </a>
                             </td>
@@ -78,14 +85,14 @@
                             <td class="d-flex justify-content-center">
                                 <div class="d-inline-flex">
                                     <div class="px-1">
-                                        <a href="#" id="edituser" class="text-primary" data-bs-toggle="modal"
+                                        <a href="#!" id="edituser" class="text-primary" data-bs-toggle="modal"
                                             data-bs-target="#editModal" data-id="<?= $user->id ?>">
                                             <i class="bi bi-pencil-square"></i>
                                         </a>
                                     </div>
 
                                     <div class="px-1">
-                                        <a href="#" onclick="deleteUser('<?= $user->id; ?>')" class="text-danger">
+                                        <a href="#!" onclick="deleteUser('<?= $user->id; ?>')" class="text-danger">
                                             <i class="bi bi-x-square-fill"></i>
                                         </a>
                                     </div>

@@ -1,20 +1,24 @@
 //* Za brisanje korisnika iz CMS
 function deleteUser(item) {
   if (confirm("Are you sure?")) {
-    var formData = {
-      user_id: item,
-    };
+    const id = item;
     $.ajax({
       type: "POST",
       url: "http://localhost/ramonda/users/delete",
-      data: formData,
+      data: id,
       success: function (response) {
         if (response.error) {
           console.log(response.error);
           alert(response.error);
         } else {
           console.log(response.success);
-          window.location.reload(true);
+          // window.location.reload(true);
+          $(".row-user")
+            .filter(function () {
+              return $(this).data("id") === id;
+            })
+            .css("background-color", "#ccc")
+            .fadeOut("slow");
         }
       },
       error: function (error) {
@@ -209,14 +213,59 @@ $(document).ready(function () {
     $(".dataTable-search").addClass("d-flex");
     $(".dataTable-input").addClass("search-user");
     $(
-      "<a href='#' id='addUser' data-bs-toggle='modal' data-bs-target='#addModal' class='btn btn-primary text-white addUser'>Add new</a>"
+      "<button id='addUser' data-bs-toggle='modal' data-bs-target='#addModal' class='btn btn-primary text-white addUser'>Add new</button>"
     ).insertBefore(".dataTable-input");
     $(".dataTable-input").width("69%");
     $(".addUser").addClass("mr-1");
 
     //dropdown
     $(".dataTable-dropdown label").append(
-      "<label id='bulkOption'><select class='dataTable-selector ml-3'><option value='Select options' selected>Select options</option></select><a href='#' class='btn btn-secondary'>Apply</a></a></label>"
+      "<label id='bulkOption' class='ml-2'><input type='button' name='btn_delete' id='btn_delete' class='btn btn-danger' value='Delete'></label>"
     );
+
+    //* Brisanje sortera za checkbox na th tag
+    $("#datatablesSimple thead tr th")
+      .find("a")
+      .first()
+      .removeClass("dataTable-sorter");
+  }
+});
+
+//? delete user on checkbox
+$(document).on("click", "#btn_delete", function () {
+  if (confirm("Are you sure you want to delete this?")) {
+    const id = [];
+    //
+    $(":checkbox:checked").each(function (i) {
+      id[i] = $(this).data("id");
+      console.log(id[i]);
+
+      $.ajax({
+        url: "http://localhost/ramonda/users/delete",
+        method: "POST",
+        data: { id: id[i] },
+        success: function (response) {
+          if (response.error) {
+            console.log(response.error);
+            alert(response.error);
+          } else {
+            console.log("Izbrisano");
+            // window.location.reload(true);
+
+            $(".row-user")
+              .filter(function () {
+                return $(this).data("id") === id[i];
+              })
+              .css("background-color", "#ccc")
+              .fadeOut("slow");
+          }
+        },
+        error: function (error) {
+          console.log(error);
+          alert("Greška, učitajte ponovo");
+        },
+        async: false,
+      });
+    });
   }
 });

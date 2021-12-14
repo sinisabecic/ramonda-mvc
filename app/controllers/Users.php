@@ -211,15 +211,11 @@ class Users extends Controller
 
     public function delete()
     {
-        $data = [
-            // 'user_id' => $_GET['user_id'],
-            'user_id' => $_POST['user_id'],
-        ];
-
-        if (isAdmin())
-            $this->userModel->deleteUser($data['user_id']);
-        else
+        if (isAdmin()) :
+            $this->userModel->deleteUser($_POST['id']);
+        else :
             header("Location: " . ROOT . "/login");
+        endif;
     }
 
 
