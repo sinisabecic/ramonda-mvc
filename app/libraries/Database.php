@@ -6,6 +6,7 @@ class Database // extends Dmodel //!* extends PDO
     private $dbUser = DB_USER;
     private $dbPass = DB_PASS;
     private $dbName = DB_NAME;
+    private $dbPort = DB_PORT;
 
     private $stmt;
     private $dbHandler;
@@ -13,7 +14,7 @@ class Database // extends Dmodel //!* extends PDO
 
     public function __construct()
     {
-        $conn = 'mysql:host=' . $this->dbHost . ';dbname=' . $this->dbName;
+        $conn = 'mysql:host=' . $this->dbHost . ';port=' . $this->dbPort . ';dbname=' . $this->dbName;
         $options = array(
             PDO::ATTR_PERSISTENT => true,
             PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION
@@ -23,14 +24,8 @@ class Database // extends Dmodel //!* extends PDO
         } catch (PDOException $e) {
             $this->error = $e->getMessage();
             echo $this->error;
-
-            //? LOG
-            $log = "log.txt";
-            if ($handle = fopen($log, 'w')) {
-                fwrite($handle, '# Error: ' . $this->error = $e->getMessage());
-                fclose($handle);
-            }
         }
+        return $this->dbHandler;
     }
 
 

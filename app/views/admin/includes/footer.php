@@ -57,7 +57,7 @@
 
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" crossorigin="anonymous">
 </script>
-<script src="https://code.jquery.com/jquery-3.3.1.min.js">
+<script src="https://code.jquery.com/jquery-3.3.1.js">
 </script>
 <script src="<?= ASSETS_URL; ?>/js/scripts.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.8.0/Chart.min.js" crossorigin="anonymous"></script>
@@ -66,4 +66,7 @@
 <script src="<?= ASSETS_URL; ?>/demo/chart-pie-demo.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/simple-datatables@latest" crossorigin="anonymous"></script>
 <script src="<?= ASSETS_URL; ?>/js/datatables-simple-demo.js"></script>
+<script src="<?= ASSETS_URL; ?>/js/jquery.mask.js"></script>
 <script src="<?= ASSETS_URL; ?>/js/functions.js"></script>
+<?php require APPROOT . '/views/admin/includes/edit-user.php'; ?>
+<?php require APPROOT . '/views/admin/includes/add-user.php'; ?>

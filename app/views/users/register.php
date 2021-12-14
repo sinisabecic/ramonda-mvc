@@ -11,12 +11,12 @@
                             <h3 class="text-center font-weight-light my-4">Create Account</h3>
                         </div>
                         <div class="card-body">
-                            <form action="<?php echo ROOT ?>/users/register" method="POST">
+                            <form action="<?php echo ROOT ?>/users/register" method="POST" class="register-form">
                                 <div class="row mb-3">
                                     <div class="col-md-6">
                                         <div class="form-floating mb-3 mb-md-0">
-                                            <input class="form-control" id="inputFirstName" name="name" type="text"
-                                                placeholder="Enter your full name" />
+                                            <input class="form-control inputFirstName" id="inputFirstName" name="name"
+                                                type="text" placeholder="Enter your full name" />
                                             <label for="inputFirstName">Full name</label>
                                             <small class="text-danger"><?php echo $data['nameError']; ?></small>
                                         </div>
@@ -56,8 +56,8 @@
                                     </div>
                                     <div class="col-md-6">
                                         <div class="form-floating">
-                                            <input class="form-control" id="inputPhone" name="phone" type="text"
-                                                placeholder="Enter your last name" />
+                                            <input class="form-control inputPhone" id="inputPhone" name="phone"
+                                                type="text" placeholder="Enter your last name" />
                                             <label for="inputPhone">Phone</label>
                                         </div>
                                     </div>

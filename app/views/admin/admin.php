@@ -1,4 +1,5 @@
 <?php require APPROOT . '/views/admin/includes/header.php'; ?>
+<?php require APPROOT . '/views/admin/includes/countries.php'; ?>
 <?php require APPROOT . '/views/admin/includes/navigation.php'; ?>
 <?php require APPROOT . '/views/admin/includes/sidebar.php'; ?>
 
@@ -18,7 +19,7 @@
                         </a>
                     </div>
                     <div class="card-footer d-flex align-items-center justify-content-between">
-                        <a class="small text-white" href="<?= ROOT ?>/admin/register">
+                        <a class="small text-white" href="#" data-bs-toggle="modal" data-bs-target="#addModal">
                             Add user
                         </a>
                         <div class="small text-white"><i class="fas fa-angle-right"></i></div>

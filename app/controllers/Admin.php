@@ -170,6 +170,7 @@ class Admin extends Controller
             if (empty($data['name']))
                 $data['nameError'] = 'Please enter name.';
 
+
             if (empty($data['password'])) {
                 $data['passwordError'] = 'Please enter a password';
             } elseif (strlen($data['password']) < 6) {

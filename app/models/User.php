@@ -14,7 +14,7 @@ class User
     public function getUsers()
     {
         $this->db->query("SELECT * FROM tbl_users
-                          ORDER BY created_at ASC");
+                          ORDER BY created_at desc");
         return $this->db->resultSet();
     }
 

@@ -190,3 +190,33 @@ function deleteSession(item) {
     });
   }
 }
+
+//? ####################################
+$(document).ready(function () {
+  $("#inputPhone").mask("+000 00 000 000 0");
+  $("#phone").mask("+000 00 000 000 0");
+  $("#zip").mask("00000-000");
+  $("#inputZip").mask("00000-000");
+});
+
+//? ### ADD NEW BUTTON ########
+/* <button class="btn btn-primary">Add new</button>; */
+$(document).ready(function () {
+  if (
+    window.location.href == "http://localhost/ramonda/admin/users" ||
+    window.location.href == "http://localhost/ramonda/admin/users#"
+  ) {
+    $(".dataTable-search").addClass("d-flex");
+    $(".dataTable-input").addClass("search-user");
+    $(
+      "<a href='#' id='addUser' data-bs-toggle='modal' data-bs-target='#addModal' class='btn btn-primary text-white addUser'>Add new</a>"
+    ).insertBefore(".dataTable-input");
+    $(".dataTable-input").width("69%");
+    $(".addUser").addClass("mr-1");
+
+    //dropdown
+    $(".dataTable-dropdown label").append(
+      "<label id='bulkOption'><select class='dataTable-selector ml-3'><option value='Select options' selected>Select options</option></select><a href='#' class='btn btn-secondary'>Apply</a></a></label>"
+    );
+  }
+});

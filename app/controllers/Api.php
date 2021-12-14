@@ -7,7 +7,6 @@ class Api extends Controller
     {
     }
 
-
     public function comtrade()
     {
         $string = file_get_contents("http://localhost/ramonda/public/json/cjenovnik-comtrade.json");

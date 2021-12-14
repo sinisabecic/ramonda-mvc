@@ -102,5 +102,5 @@
 </main>
 
 
-<?php require APPROOT . '/views/admin/includes/edit-user.php'; ?>
+
 <?php require APPROOT . '/views/admin/includes/footer.php'; ?>

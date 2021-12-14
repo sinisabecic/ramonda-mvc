@@ -4,6 +4,7 @@ define('DB_HOST', 'localhost');
 define('DB_USER', 'root');
 define('DB_PASS', '');
 define('DB_NAME', 'db_store');
+define('DB_PORT', 3306);
 
 //* APPROOT
 define('APPROOT', dirname(dirname(__FILE__)));
