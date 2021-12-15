@@ -1,6 +1,6 @@
 <!-- Modal for edit user -->
 <div class="modal fade" id="addModal" tabindex="-1" aria-labelledby="addModalLabel" aria-hidden="true">
-    <div class="modal-dialog modal-xl">
+    <div class="modal-dialog modal-lg">
         <div class="modal-content">
             <div class="modal-header">
                 <h5 class="modal-title" id="addModalLabel"></h5>
@@ -80,13 +80,31 @@
                             placeholder="name@example.com" />
                         <label for="address">Address</label>
                     </div>
-                    <div class="form-floating mb-3">
-                        <input class="form-control" id="username" name="username" type="text"
-                            placeholder="name@example.com" />
-                        <label for="username">Username</label>
-                        <small class="text-danger"><?= $data['usernameError'] ?? null; ?></small>
+                    <div class="row mb-0">
+                        <div class="col-md-6">
+                            <div class="form-floating mb-3">
+                                <input class="form-control" id="username" name="username" type="text"
+                                    placeholder="name@example.com" />
+                                <label for="username">Username</label>
+                                <small class="text-danger"><?= $data['usernameError'] ?? null; ?></small>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="mt-0 mb-0">
+                                <div class="d-grid form-floating">
+                                    <select class="form-select" name="is_admin" id="is_admin" type="text"
+                                        placeholder="Select role (default is user)">
+                                        <option value="0" selected>User</option>
+                                        <option value="1">Administrator</option>
+                                    </select>
+                                    <label for="is_admin">Role</label>
+                                </div>
+                            </div>
+
+                        </div>
                     </div>
-                    <div class="row mb-3">
+
+                    <div class="row mb-0">
                         <div class="col-md-6">
                             <div class="form-floating mb-3 mb-md-0">
                                 <input class="form-control" id="password" name="password" type="password"
@@ -107,17 +125,10 @@
                     <div class="row mb-3">
                         <div class="col-md-6">
                             <div class="mt-4 mb-0">
-                                <div class="d-grid form-floating">
-                                    <select class="form-select" name="is_admin" id="is_admin" type="text"
-                                        placeholder="Select role (default is user)">
-                                        <option value="0" selected>User</option>
-                                        <option value="1">Administrator</option>
-                                    </select>
-                                    <label for="is_admin">Role</label>
-                                </div>
+                                <label for="logo" class="form-label">Choose a profile photo</label>
+                                <input class="form-control form-control-md" id="avatar" name="avatar" type="file">
                             </div>
                         </div>
-
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>

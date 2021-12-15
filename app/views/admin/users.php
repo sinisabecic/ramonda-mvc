@@ -32,6 +32,7 @@
                             <th>
                                 <input type="checkbox" name="" id="selectAllUsers">
                             </th>
+                            <th>Image</th>
                             <th>Name</th>
                             <th>Username</th>
                             <th>E-mail</th>
@@ -44,6 +45,7 @@
                     </thead>
                     <tfoot>
                         <tr>
+                            <th>Image</th>
                             <th>Name</th>
                             <th>Username</th>
                             <th>E-mail</th>
@@ -60,6 +62,10 @@
                         <tr class="row-user" data-id="<?= $user->id ?>">
                             <td>
                                 <input type="checkbox" name="user_id[]" id="delete_user" data-id="<?= $user->id ?>">
+                            </td>
+                            <td class="d-flex justify-content-center">
+                                <img src="<?= AVATAR ?>" class="img-fluid rounded-circle" alt="" width="42px"
+                                    height="42px">
                             </td>
                             <td><?= $user->name; ?></td>
                             <td><?= $user->username; ?></td>

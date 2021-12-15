@@ -144,6 +144,36 @@
                 </table>
             </div>
         </div>
+
+
+        <div class="card mb-4">
+            <div class="card-header">
+                <i class="fas fa-table me-1"></i>
+                Srpska liga
+            </div>
+            <div class="card-body">
+                <iframe id="sofa-standings-embed-1107-37148" width="100%" height="605"
+                    src="https://www.sofascore.com/tournament/1107/37148/standings/tables/embed" frameborder="0"
+                    scrolling="no" style="height:605px!important"> </iframe>
+                <script>
+                (function(el) {
+                    window.addEventListener("message", (event) => {
+                        if (event.origin.startsWith("https://www.sofascore")) {
+                            if (el.id === event.data.id) {
+                                el.style.height = event.data.height + "px";
+                            }
+                        }
+                    });
+                })(document.getElementById("sofa-standings-embed-1107-37148"));
+                </script>
+                <div style="font-size:12px;font-family:Arial,sans-serif">Standings provided by <a target="_blank"
+                        href="https://www.sofascore.com/">SofaScore LiveScore</a></div>
+                <script type="text/javascript"
+                    src="https://www.sofascore.com/bundles/sofascoreweb/js/bin/util/embed.min.js"> </script>
+            </div>
+        </div>
+
+
     </div>
 </main>
 

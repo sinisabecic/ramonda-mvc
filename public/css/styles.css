@@ -3242,9 +3242,24 @@ textarea.is-invalid.dataTable-input {
 #addUser.btn:focus,
 #addUser.btn:active,
 #btn_delete:focus,
-#btn_delete:active {
+#btn_delete:active,
+#btn_delete_session:focus,
+#btn_delete_session:active,
+.dataTable-input:focus,
+.dataTable-input:active,
+.form-control:focus,
+.form-control:active,
+.form-select:focus,
+.form-select:active {
   outline: none !important;
   box-shadow: none !important;
+}
+
+.form-control:focus,
+.form-control:active,
+.form-select:focus,
+.form-select:active {
+  border: 2px solid #b1d0e0;
 }
 
 @media (prefers-reduced-motion: reduce) {
