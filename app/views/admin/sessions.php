@@ -30,6 +30,7 @@
                 <table id="datatablesSimple">
                     <thead>
                         <tr>
+                            <th></th>
                             <th>ID</th>
                             <th>User ID</th>
                             <th>Username</th>
@@ -57,6 +58,11 @@
                         <?php foreach ($data['sessionsAll'] as $session) : ?>
 
                         <tr class="row-session" data-id="<?= $session->s_id ?>">
+
+                            <td>
+                                <input type="checkbox" name="session_id[]" id="delete_session"
+                                    data-id="<?= $session->s_id ?>">
+                            </td>
 
                             <td><?= $session->s_id; ?></td>
                             <td><?= $session->user_id; ?></td>

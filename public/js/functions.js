@@ -234,9 +234,28 @@ $(document).ready(function () {
       .first()
       .removeClass("dataTable-sorter");
   }
+
+  if (
+    window.location.href == "http://localhost/ramonda/admin/sessions" ||
+    window.location.href == "http://localhost/ramonda/admin/sessions#" ||
+    window.location.href == "http://localhost/ramonda/admin/sessions#!"
+  ) {
+    $(".dataTable-input").width("69%");
+    $(".addUser").addClass("mr-1");
+
+    //dropdown
+    $(".dataTable-dropdown label").append(
+      "<label id='bulkOption' class='ml-2'><input type='button' name='btn_delete_session' id='btn_delete_session' class='btn btn-danger' value='Delete'/></label>"
+    );
+
+    $("#datatablesSimple thead tr th")
+      .find("a")
+      .first()
+      .removeClass("dataTable-sorter");
+  }
 });
 
-//? delete user on checkbox
+//? delete USER on checkbox
 $(document).on("click", "#btn_delete", function () {
   if (confirm("Are you sure you want to delete this?")) {
     const id = [];
@@ -274,3 +293,40 @@ $(document).on("click", "#btn_delete", function () {
   }
 });
 
+//? delete SESSION on checkbox
+$(document).on("click", "#btn_delete_session", function () {
+  if (confirm("Are you sure you want to delete this?")) {
+    const id = [];
+    //
+    $(":checkbox:checked").each(function (i) {
+      id[i] = $(this).data("id");
+      console.log(id[i]);
+
+      $.ajax({
+        url: "http://localhost/ramonda/sessions/delete",
+        method: "POST",
+        data: { session_id: id[i] },
+        success: function (data) {
+          if (data.error) {
+            console.log(data.error);
+            alert(data.error);
+          } else {
+            console.log("Izbrisano");
+
+            $(".row-session")
+              .filter(function () {
+                return $(this).data("id") === id[i];
+              })
+              .css("background-color", "#ECECEC")
+              .fadeOut("slow");
+          }
+        },
+        error: function (error) {
+          console.log(error);
+          alert("Greška, učitajte ponovo");
+        },
+        async: false,
+      });
+    });
+  }
+});
