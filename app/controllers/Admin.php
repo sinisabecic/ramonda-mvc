@@ -76,7 +76,7 @@ class Admin extends Controller
         ];
 
         if (isset($_GET['type']) && $_GET['type'] == 'json') :
-            echo json_encode($data['sessions']);
+            var_dump($data['sessions']);
         else :
             $this->view('admin/sessions', $data);
         endif;

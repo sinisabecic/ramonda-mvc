@@ -12,10 +12,6 @@ class Sessions extends Controller
     //* Za ajax f-ju
     public function delete()
     {
-        $data = [
-            'session_id' => $_POST['session_id'],
-        ];
-
-        $this->sessionModel->deleteSession($data['session_id']);
+        $this->sessionModel->deleteSession($_POST['session_id']);
     }
 }

@@ -17,7 +17,7 @@ function deleteUser(item) {
             .filter(function () {
               return $(this).data("id") === id;
             })
-            .css("background-color", "#ccc")
+            .css("background-color", "#ECECEC")
             .fadeOut("slow");
         }
       },
@@ -182,8 +182,12 @@ function deleteSession(item) {
           console.log(response.error);
           alert(response.error);
         } else {
-          console.log(response.success);
-          window.location.reload(true);
+          console.log("Izbrisano: " + formData.session_id);
+          // window.location.reload(true);
+
+          $(".row-session[data-id=" + formData.session_id + "]")
+            .css("background-color", "#ECECEC")
+            .fadeOut("slow");
         }
       },
       error: function (error) {
@@ -208,7 +212,8 @@ $(document).ready(function () {
 $(document).ready(function () {
   if (
     window.location.href == "http://localhost/ramonda/admin/users" ||
-    window.location.href == "http://localhost/ramonda/admin/users#"
+    window.location.href == "http://localhost/ramonda/admin/users#" ||
+    window.location.href == "http://localhost/ramonda/admin/users#!"
   ) {
     $(".dataTable-search").addClass("d-flex");
     $(".dataTable-input").addClass("search-user");
@@ -220,7 +225,7 @@ $(document).ready(function () {
 
     //dropdown
     $(".dataTable-dropdown label").append(
-      "<label id='bulkOption' class='ml-2'><input type='button' name='btn_delete' id='btn_delete' class='btn btn-danger' value='Delete'></label>"
+      "<label id='bulkOption' class='ml-2'><input type='button' name='btn_delete' id='btn_delete' class='btn btn-danger' value='Delete'/></label>"
     );
 
     //* Brisanje sortera za checkbox na th tag
@@ -244,19 +249,18 @@ $(document).on("click", "#btn_delete", function () {
         url: "http://localhost/ramonda/users/delete",
         method: "POST",
         data: { id: id[i] },
-        success: function (response) {
-          if (response.error) {
-            console.log(response.error);
-            alert(response.error);
+        success: function (data) {
+          if (data.error) {
+            console.log(data.error);
+            alert(data.error);
           } else {
             console.log("Izbrisano");
-            // window.location.reload(true);
 
             $(".row-user")
               .filter(function () {
                 return $(this).data("id") === id[i];
               })
-              .css("background-color", "#ccc")
+              .css("background-color", "#ECECEC")
               .fadeOut("slow");
           }
         },
@@ -269,3 +273,4 @@ $(document).on("click", "#btn_delete", function () {
     });
   }
 });
+

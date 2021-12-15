@@ -14,8 +14,8 @@ class Session
 
     public function insertSessionData($user_id)
     {
-        $this->db->query('INSERT INTO tbl_sessions (user_id, logged_at)
-                          VALUES (:user_id, now())');
+        $this->db->query('INSERT INTO tbl_sessions (user_id)
+                          VALUES (:user_id)');
 
         $this->db->bind(":user_id", $user_id);
         // $this->db->bind(":logged_at", $logged_at);
@@ -35,7 +35,7 @@ class Session
     }
 
 
-    public function deleteSession($id = NULL)
+    public function deleteSession($id)
     {
         $this->db->query('DELETE FROM tbl_sessions
                           WHERE id = :id');
@@ -48,14 +48,15 @@ class Session
 
     public function getSessionsByMonth()
     {
-        $this->db->query('SELECT count(y.user_id) count_of_logins
+        $this->db->query('SELECT *, count(y.user_id) count_of_logins
                           FROM (SELECT *, Month(CAST(logged_at as DATE)) month
                                 FROM tbl_sessions) y
-                          GROUP by y.month
+                          GROUP by y.month                 
                         ');
 
         return $this->db->resultSet();
     }
+
 
     public function lastActivity()
     {

@@ -3,20 +3,20 @@ Chart.defaults.global.defaultFontFamily =
   '-apple-system,system-ui,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif';
 Chart.defaults.global.defaultFontColor = "#292b2c";
 
-//! Primitivan nacin
+//! Primitivan nacin, ali efikasan
 // Bar Chart variables of html elements which are stated in footer.php
-var jan = $("#sessionsCount1").text().trim();
-var feb = $("#sessionsCount2").text().trim();
-var mar = $("#sessionsCount3").text().trim();
-var apr = $("#sessionsCount4").text().trim();
-var may = $("#sessionsCount5").text().trim();
-var jun = $("#sessionsCount6").text().trim();
-var jul = $("#sessionsCount7").text().trim();
-var aug = $("#sessionsCount8").text().trim();
-var sep = $("#sessionsCount9").text().trim();
-var oct = $("#sessionsCount10").text().trim();
-var nov = $("#sessionsCount11").text().trim();
-var dec = $("#sessionsCount12").text().trim();
+var jan = $("#sessionsCount0").text().trim();
+var feb = $("#sessionsCount1").text().trim();
+var mar = $("#sessionsCount2").text().trim();
+var apr = $("#sessionsCount3").text().trim();
+var may = $("#sessionsCount4").text().trim();
+var jun = $("#sessionsCount5").text().trim();
+var jul = $("#sessionsCount6").text().trim();
+var aug = $("#sessionsCount7").text().trim();
+var sep = $("#sessionsCount8").text().trim();
+var oct = $("#sessionsCount9").text().trim();
+var nov = $("#sessionsCount10").text().trim();
+var dec = $("#sessionsCount11").text().trim();
 
 var ctx = $("#myBarChart");
 

@@ -56,7 +56,8 @@
 
                         <?php foreach ($data['sessionsAll'] as $session) : ?>
 
-                        <tr>
+                        <tr class="row-session" data-id="<?= $session->s_id ?>">
+
                             <td><?= $session->s_id; ?></td>
                             <td><?= $session->user_id; ?></td>
                             <td>
@@ -76,15 +77,9 @@
                             </td>
                             <td class="d-flex justify-content-center">
                                 <div class="d-inline-flex">
-                                    <!-- <div class="px-1">
-                                        <a href="#" id="editsession" class="text-primary" data-bs-toggle="modal"
-                                            data-bs-target="#editModal" data-id="<?= $session->s_id ?>">
-                                            <i class="bi bi-pencil-square"></i>
-                                        </a>
-                                    </div> -->
 
                                     <div class="px-1">
-                                        <a href="#" onclick="deleteSession('<?= $session->s_id; ?>')"
+                                        <a href="#!" onclick="deleteSession('<?= $session->s_id; ?>')"
                                             class="text-danger">
                                             <i class="bi bi-x-square-fill"></i>
                                         </a>
