@@ -102,9 +102,9 @@ class User
     public function registerFromAdmin($data)
     {
         $this->db->query('INSERT INTO tbl_users (id, username, email, password, 
-                                                 name, address, phone, zip, country, city, is_admin) 
+                                                 name, image, address, phone, zip, country, city, is_admin) 
                           VALUES(:id, :username, :email, :password,
-                                 :name, :address, :phone, :zip, :country, :city, :is_admin
+                                 :name, :image, :address, :phone, :zip, :country, :city, :is_admin
                           )');
         // hash id
         $rand = rand(999, 9999);
@@ -115,6 +115,7 @@ class User
         $this->db->bind(':username', $data['username']);
         $this->db->bind(':email', $data['email']);
         $this->db->bind(':name', $data['name']);
+        $this->db->bind(':image', $data['image']);
         $this->db->bind(':password', $data['password']);
         $this->db->bind(':address', $data['address']);
         $this->db->bind(':phone', $data['phone']);
@@ -128,7 +129,7 @@ class User
     }
 
 
-    public function deleteUser($id = NULL)
+    public function deleteUser($id)
     {
         $this->db->query('DELETE FROM tbl_users
                           WHERE id = :id');

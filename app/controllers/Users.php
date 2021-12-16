@@ -202,8 +202,10 @@ class Users extends Controller
     public function logout()
     {
         unset($_SESSION['user_id']);
+        unset($_SESSION['name']);
         unset($_SESSION['username']);
         unset($_SESSION['email']);
+        unset($_SESSION['is_admin']);
         unset($_SESSION['login']);
         header("Location: " . ROOT . "/login");
     }
@@ -214,7 +216,7 @@ class Users extends Controller
         if (isAdmin()) :
             $this->userModel->deleteUser($_POST['id']);
         else :
-            header("Location: " . ROOT . "/login");
+            $this->redirect('login');
         endif;
     }
 

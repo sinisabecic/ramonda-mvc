@@ -64,7 +64,7 @@
                                 <input type="checkbox" name="user_id[]" id="delete_user" data-id="<?= $user->id ?>">
                             </td>
                             <td class="d-flex justify-content-center">
-                                <img src="<?= AVATAR ?>" class="img-fluid rounded-circle" alt="" width="42px"
+                                <img src="<?= $user->image ?>" class="img-fluid rounded-circle" alt="" width="42px"
                                     height="42px">
                             </td>
                             <td><?= $user->name; ?></td>

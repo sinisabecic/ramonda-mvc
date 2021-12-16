@@ -10,7 +10,7 @@
             </div>
             <div class="modal-body">
 
-                <form action="<?= ROOT ?>/admin/register" method="POST">
+                <form action="<?= ROOT ?>/admin/register" method="POST" enctype="multipart/form-data">
 
                     <input class="form-control" id="id" name="id" type="text" placeholder="Enter your full name"
                         hidden />
@@ -125,8 +125,11 @@
                     <div class="row mb-3">
                         <div class="col-md-6">
                             <div class="mt-4 mb-0">
-                                <label for="logo" class="form-label">Choose a profile photo</label>
-                                <input class="form-control form-control-md" id="avatar" name="avatar" type="file">
+                                <label for="image" class="btn btn-dark btn-md">
+                                    <input class="form-control form-control-md" id="image" name="image" type="file"
+                                        style="display:none">
+                                    Select image...
+                                </label>
                             </div>
                         </div>
                     </div>

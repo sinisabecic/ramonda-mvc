@@ -1,21 +1,22 @@
 //* Za brisanje korisnika iz CMS
 function deleteUser(item) {
   if (confirm("Are you sure?")) {
-    const id = item;
+    const formData = { id: item };
     $.ajax({
       type: "POST",
       url: "http://localhost/ramonda/users/delete",
-      data: id,
+      data: formData,
       success: function (response) {
         if (response.error) {
           console.log(response.error);
           alert(response.error);
         } else {
-          console.log(response.success);
+          console.log("Izbrisan User ID: " + formData.id);
+
           // window.location.reload(true);
           $(".row-user")
             .filter(function () {
-              return $(this).data("id") === id;
+              return $(this).data("id") === formData.id;
             })
             .css("background-color", "#ECECEC")
             .fadeOut("slow");
