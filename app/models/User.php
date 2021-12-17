@@ -98,13 +98,25 @@ class User
         return $this->db->execute() ? true : false;
     }
 
+
     //* Registracija sa administratorske strane
-    public function registerFromAdmin($data)
+    public function registerFromAdmin($data, $file)
     {
+        $permited = array('jpg', 'png', 'jpeg', 'gif');
+        $file_name = $file['image']['name'];
+        $file_size = $file['image']['size'];
+        $file_temp = $file['image']['tmp_name'];
+
+        $div = explode('.', $file_name);
+        $file_ext = strtolower(end($div));
+        $unique_image = substr(md5(time()), 0, 10) . '.' . $file_ext;
+        $uploaded_image = "uploads/" . $unique_image;
+
+
         $this->db->query('INSERT INTO tbl_users (id, username, email, password, 
                                                  name, image, address, phone, zip, country, city, is_admin) 
                           VALUES(:id, :username, :email, :password,
-                                 :name, :image, :address, :phone, :zip, :country, :city, :is_admin
+                                 :name, :uploaded_image, :address, :phone, :zip, :country, :city, :is_admin
                           )');
         // hash id
         $rand = rand(999, 9999);
@@ -115,7 +127,7 @@ class User
         $this->db->bind(':username', $data['username']);
         $this->db->bind(':email', $data['email']);
         $this->db->bind(':name', $data['name']);
-        $this->db->bind(':image', $data['image']);
+        $this->db->bind(':uploaded_image', $uploaded_image);
         $this->db->bind(':password', $data['password']);
         $this->db->bind(':address', $data['address']);
         $this->db->bind(':phone', $data['phone']);
@@ -123,6 +135,9 @@ class User
         $this->db->bind(':country', $data['country']);
         $this->db->bind(':city', $data['city']);
         $this->db->bind(':is_admin', $data['is_admin']);
+
+        move_uploaded_file($file_temp, $uploaded_image);
+
 
         //* Execute function
         return $this->db->execute() ? true : false;

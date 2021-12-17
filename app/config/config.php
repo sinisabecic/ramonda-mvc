@@ -23,4 +23,4 @@ define('SITENAME', 'Ramonda');
 define('LOGO_SVG', ROOT . '/public/img/ramonda.svg');
 define('LOGO_PNG', ROOT . '/public/img/ramonda2.png');
 define('AVATAR', ROOT . '/public/img/avatar.png');
-define('STORAGE_IMG', APPROOT . '/public/img/storage');
+define('UPLOADS', 'http://localhost/ramonda/public');

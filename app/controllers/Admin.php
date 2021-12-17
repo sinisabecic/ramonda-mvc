@@ -85,7 +85,6 @@ class Admin extends Controller
 
     public function activity()
     {
-        // $sessions = $this->sessionModel->getSessions();
         $lastActivity = $this->sessionModel->lastActivity();
         $sessions = $this->sessionModel->getSessionsByMonth();
 
@@ -121,10 +120,12 @@ class Admin extends Controller
             'address' => '',
             'is_admin' => '',
             'alert' => '',
-            'image' => '',
         ];
 
+
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+
+
             //* Da u action tag forme bude url a ne naziv fajla
             $_POST = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
 
@@ -146,36 +147,10 @@ class Admin extends Controller
                 'phone' => trim($_POST['phone']),
                 'address' => trim($_POST['address']),
                 'is_admin' => trim($_POST['is_admin']),
-                'alert' => '',
-                'imageFile' => $_FILES['image'],
-                'imagePath' => '',
-                'image' => '',
             ];
 
             $nameValidation = "/^[a-zA-Z0-9]*$/";
             $passwordValidation = "/^(.{0,7}|[^a-z]*|[^\d]*)$/i";
-
-
-            //we have an image
-            $allowed[] = "image/jpeg";
-            $allowed[] = "image/png";
-
-            if ($data['imageFile']['error'] == 0 && in_array($data['imageFile']['type'], $allowed)) {
-                $folder = "uploads/";
-                if (!file_exists($folder)) {
-                    mkdir($folder, 0777, true);
-                }
-                $destination = $folder . time() . "_" . $data['imageFile']['name'];
-                move_uploaded_file($data['imageFile']['tmp_name'], $destination);
-                return $destination;
-                echo "
-                    <script>
-                        alert('$destination');
-                    </script>
-                ";
-            }
-
-
 
             //* Validacija korisnickog imena
             if (empty($data['username'])) {
@@ -212,6 +187,7 @@ class Admin extends Controller
                 }
             }
 
+
             //* Make sure that errors are empty
             if (
                 empty($data['usernameError']) && empty($data['emailError']) &&
@@ -222,14 +198,13 @@ class Admin extends Controller
                 $data['password'] = password_hash($data['password'], PASSWORD_DEFAULT);
 
                 //? Register user from model function
-                if ($this->userModel->registerFromAdmin($data)) {
-                    $this->redirect('admin/users');
+                if ($this->userModel->registerFromAdmin($data, $_FILES)) {
+                    header("Location:" . ROOT . '/admin/users?success');
                 } else {
                     die('Something went wrong.');
                 }
             }
         }
-
-        $this->view('admin/register', $data);
+        $this->view('admin/includes/add-user', $data);
     }
 }

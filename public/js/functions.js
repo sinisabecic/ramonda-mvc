@@ -214,7 +214,8 @@ $(document).ready(function () {
   if (
     window.location.href == "http://localhost/ramonda/admin/users" ||
     window.location.href == "http://localhost/ramonda/admin/users#" ||
-    window.location.href == "http://localhost/ramonda/admin/users#!"
+    window.location.href == "http://localhost/ramonda/admin/users#!" ||
+    window.location.href == "http://localhost/ramonda/admin/users?success"
   ) {
     $(".dataTable-search").addClass("d-flex");
     $(".dataTable-input").addClass("search-user");

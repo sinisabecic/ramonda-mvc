@@ -118,6 +118,16 @@
                             </div>
                         </div>
 
+                        <!-- <div class="col-md-6">
+                            <div class="mt-4 mb-0">
+                                <label for="image" class="btn btn-dark btn-md">
+                                    <input class="form-control form-control-md" id="image" name="image" type="file"
+                                        style="display:none">
+                                    Select image...
+                                </label>
+                            </div>
+                        </div> -->
+
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>

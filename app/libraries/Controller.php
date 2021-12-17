@@ -9,7 +9,7 @@ class Controller
 
     public function view($filename, $data = [])
     {
-        // extract($data);
+        extract($data);
 
         if (file_exists('../app/views/' . $filename . '.php')) {
             require_once('../app/views/' . $filename . '.php');

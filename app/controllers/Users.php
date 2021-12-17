@@ -246,11 +246,10 @@ class Users extends Controller
                 'phone' => trim($_POST['phone']),
                 'address' => trim($_POST['address']),
                 'is_admin' => trim($_POST['is_admin']),
-
             ];
 
             if ($this->userModel->updateUser($data))
-                header("Location: " . ROOT . "/admin/users");
+                header("Location: " . ROOT . "/admin/users?success");
             else
                 die('Greska');
         }
