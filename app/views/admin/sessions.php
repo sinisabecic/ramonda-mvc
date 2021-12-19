@@ -30,7 +30,9 @@
                 <table id="datatablesSimple">
                     <thead>
                         <tr>
-                            <th></th>
+                            <th>
+                                <input type="checkbox" id="selectAllBoxes">
+                            </th>
                             <th>ID</th>
                             <th>User ID</th>
                             <th>Username</th>
@@ -60,7 +62,7 @@
                         <tr class="row-session" data-id="<?= $session->s_id ?>">
 
                             <td>
-                                <input type="checkbox" name="session_id[]" id="delete_session"
+                                <input type="checkbox" name="session_id[]" id="delete_session" class="checkBoxes"
                                     data-id="<?= $session->s_id ?>">
                             </td>
 

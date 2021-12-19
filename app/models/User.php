@@ -44,8 +44,8 @@ class User
 
     public function findUserByUsername($username)
     {
-        $this->db->query('SELECT count(*) FROM tbl_users
-                          WHERE username = :username');
+        $this->db->query('SELECT count(*) num_rows FROM tbl_users
+                          WHERE username = :username LIMIT 1');
 
         $this->db->bind(':username', $username);
 

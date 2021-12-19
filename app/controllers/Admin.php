@@ -18,8 +18,14 @@ class Admin extends Controller
         $data = [
             'title-tab' => 'CMS | Ramonda',
             'users' => $users,
+            'page' => 'Users',
             'table-name' => 'Users',
             'sessions' => $sessions,
+            'usernameError' => '',
+            'nameError' => '',
+            'emailError' => '',
+            'passwordError' => '',
+            'confirmPasswordError' => '',
         ];
         $this->view('admin/admin', $data);
 
@@ -36,6 +42,11 @@ class Admin extends Controller
             'title-tab' => 'Users | Ramonda',
             'users' => $users,
             'page' => 'Users',
+            'usernameError' => '',
+            'nameError' => '',
+            'emailError' => '',
+            'passwordError' => '',
+            'confirmPasswordError' => '',
         ];
 
         $this->view('admin/users', $data);
@@ -104,6 +115,7 @@ class Admin extends Controller
         $data = [
             'title-tab' => 'Registration | Ramonda',
             'username' => '',
+            'page' => 'Users',
             'name' => '',
             'email' => '',
             'password' => '',
@@ -187,7 +199,6 @@ class Admin extends Controller
                 }
             }
 
-
             //* Make sure that errors are empty
             if (
                 empty($data['usernameError']) && empty($data['emailError']) &&
@@ -205,6 +216,6 @@ class Admin extends Controller
                 }
             }
         }
-        $this->view('admin/includes/add-user', $data);
+        $this->view('admin/register', $data);
     }
 }

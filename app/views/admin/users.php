@@ -50,7 +50,7 @@
                     <thead>
                         <tr>
                             <th>
-                                <input type="checkbox" name="" id="selectAllUsers">
+                                <input type="checkbox" id="selectAllBoxes">
                             </th>
                             <th>Image</th>
                             <th>Name</th>
@@ -81,7 +81,8 @@
                         <?php foreach ($data['users'] as $user) : ?>
                         <tr class="row-user" data-id="<?= $user->id ?>">
                             <td>
-                                <input type="checkbox" name="user_id[]" id="delete_user" data-id="<?= $user->id ?>">
+                                <input type="checkbox" name="user_id[]" id="delete_user" class="checkBoxes"
+                                    data-id="<?= $user->id ?>">
                             </td>
                             <td class="d-flex justify-content-center">
                                 <img src="<?php
